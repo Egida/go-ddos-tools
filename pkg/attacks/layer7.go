@@ -12,8 +12,8 @@ import (
 	"sync"
 	"time"
 
-	"example.com/ddos-tools/pkg/proxy"
-	"example.com/ddos-tools/pkg/utils"
+	"github.com/go-ddos-tools/pkg/proxy"
+	"github.com/go-ddos-tools/pkg/utils"
 )
 
 // Layer7Config holds configuration for Layer 7 attacks

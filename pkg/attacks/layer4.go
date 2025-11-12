@@ -8,9 +8,9 @@ import (
 	"sync"
 	"time"
 
-	"example.com/ddos-tools/pkg/minecraft"
-	"example.com/ddos-tools/pkg/proxy"
-	"example.com/ddos-tools/pkg/utils"
+	"github.com/go-ddos-tools/pkg/minecraft"
+	"github.com/go-ddos-tools/pkg/proxy"
+	"github.com/go-ddos-tools/pkg/utils"
 )
 
 // Layer4Config holds configuration for Layer 4 attacks

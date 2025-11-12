@@ -1,3 +1,3 @@
-module example.com/ddos-tools
+module github.com/go-ddos-tools
 
 go 1.25.4

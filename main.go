@@ -13,12 +13,12 @@ import (
 	"syscall"
 	"time"
 
-	"example.com/ddos-tools/pkg/attacks"
-	"example.com/ddos-tools/pkg/config"
-	"example.com/ddos-tools/pkg/methods"
-	"example.com/ddos-tools/pkg/proxy"
-	"example.com/ddos-tools/pkg/tools"
-	"example.com/ddos-tools/pkg/utils"
+	"github.com/go-ddos-tools/pkg/attacks"
+	"github.com/go-ddos-tools/pkg/config"
+	"github.com/go-ddos-tools/pkg/methods"
+	"github.com/go-ddos-tools/pkg/proxy"
+	"github.com/go-ddos-tools/pkg/tools"
+	"github.com/go-ddos-tools/pkg/utils"
 )
 
 const version = "2.4 SNAPSHOT (Go)"
