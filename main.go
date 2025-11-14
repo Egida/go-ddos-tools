@@ -287,7 +287,7 @@ func monitorAttack(duration int, method, target string, stopChan chan struct{}, 
 }
 
 func printUsage() {
-	fmt.Printf(`MHDDoS - DDoS Attack Script (Go Version %s)
+	fmt.Printf(`DDoS-Tools - DDoS Attack Script (Go Version %s)
 
 Usage:
   Layer7: %s <method> <url> <socks_type> <threads> <proxylist> <rpc> <duration>
