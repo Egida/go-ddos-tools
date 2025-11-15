@@ -139,7 +139,7 @@ func runDstat() {
 
 // runCheck checks if a website is online
 func runCheck(hostname string, scanner *bufio.Scanner) {
-	prompt := fmt.Sprintf("%s@MHTools:~# give-me-ipaddress# ", hostname)
+	prompt := fmt.Sprintf("%s@DDoSTools:~# give-me-ipaddress# ", hostname)
 
 	for {
 		fmt.Print(prompt)
