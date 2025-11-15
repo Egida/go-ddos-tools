@@ -122,12 +122,12 @@ func runDstat() {
 		memPercent := float64(m.Alloc) / float64(m.Sys) * 100
 
 		fmt.Printf("\n--- Network & System Statistics ---\n")
-		fmt.Printf("Bytes Sent:      	%s/s\n", utils.HumanBytes(bytesSent))
-		fmt.Printf("Bytes Received:  	%s/s\n", utils.HumanBytes(bytesRecv))
-		fmt.Printf("Packets Sent:    	%s/s\n", utils.HumanFormat(packetsSent))
-		fmt.Printf("Packets Received: 	%s/s\n", utils.HumanFormat(packetsRecv))
-		fmt.Printf("Memory Usage:    	%d MB / %d MB (%.2f%%)\n", memUsedMB, memTotalMB, memPercent)
-		fmt.Printf("Goroutines:      	%d\n", runtime.NumGoroutine())
+		fmt.Printf("Bytes Sent:        %s/s\n", utils.HumanBytes(bytesSent))
+		fmt.Printf("Bytes Received:    %s/s\n", utils.HumanBytes(bytesRecv))
+		fmt.Printf("Packets Sent:      %s/s\n", utils.HumanFormat(packetsSent))
+		fmt.Printf("Packets Received:  %s/s\n", utils.HumanFormat(packetsRecv))
+		fmt.Printf("Memory Usage:      %d MB / %d MB (%.2f%%)\n", memUsedMB, memTotalMB, memPercent)
+		fmt.Printf("Goroutines:        %d\n", runtime.NumGoroutine())
 		fmt.Println("-----------------------------------")
 
 		time.Sleep(1 * time.Second)

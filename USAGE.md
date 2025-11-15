@@ -325,12 +325,12 @@ Command: DSTAT
 
 Output:
 --- Network & System Statistics ---
-Bytes Sent:      1.25 MiB/s
-Bytes Received:  2.50 MiB/s
-Packets Sent:    1.2k/s
+Bytes Sent:       1.25 MiB/s
+Bytes Received:   2.50 MiB/s
+Packets Sent:     1.2k/s
 Packets Received: 2.5k/s
-Memory Usage:    256 MB / 8192 MB (3.13%)
-Goroutines:      42
+Memory Usage:     256 MB / 8192 MB (3.13%)
+Goroutines:       42
 -----------------------------------
 ```
 
