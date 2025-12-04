@@ -254,8 +254,8 @@ func runLayer7Attack(method, target string, cfg *config.Config, wg *sync.WaitGro
 	select {
 	case <-done:
 		// All goroutines finished normally
-	case <-time.After(5 * time.Second):
-		// Timeout after 5 seconds
+	case <-time.After(2 * time.Second):
+		// Timeout after 2 seconds
 		ui.PrintWarning("Some threads did not stop gracefully, forcing shutdown...")
 	}
 
@@ -401,8 +401,8 @@ func runLayer4Attack(method, target string, cfg *config.Config, wg *sync.WaitGro
 	select {
 	case <-done:
 		// All goroutines finished normally
-	case <-time.After(5 * time.Second):
-		// Timeout after 5 seconds
+	case <-time.After(2 * time.Second):
+		// Timeout after 2 seconds
 		ui.PrintWarning("Some threads did not stop gracefully, forcing shutdown...")
 	}
 

