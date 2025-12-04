@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Improved Attack Output Display (November 2025)
+- **Enhanced Attack Configuration Banner**
+  - Now displays RPC (Requests Per Connection) for Layer 7 attacks
+  - Shows proxy count and proxy type (HTTP, SOCKS4, SOCKS5, etc.)
+  - Displays user agent count for Layer 7 attacks
+  - Displays referer count for Layer 7 attacks
+  - Better formatted output with aligned columns
+  - Provides complete attack parameter visibility before starting
+
 ### Code Modernization (November 2025)
 - **Modernized to Go 1.21+ syntax**
   - Removed custom `min()` and `max()` functions in favor of built-in functions (Go 1.21+)

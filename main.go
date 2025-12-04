@@ -220,7 +220,7 @@ func runLayer7Attack(method, target string, cfg *config.Config, wg *sync.WaitGro
 		}
 	}
 
-	printAttackBanner(method, target, threads, duration, "Layer7")
+	printAttackBanner(method, target, threads, duration, rpc, len(proxies), proxyType, len(userAgents), len(referers), "Layer7")
 
 	// Create attack configuration
 	attackCfg := &attacks.Layer7Config{
@@ -352,7 +352,7 @@ func runLayer4Attack(method, target string, cfg *config.Config, wg *sync.WaitGro
 		}
 	}
 
-	printAttackBanner(method, fmt.Sprintf("%s:%d", host, port), threads, duration, "Layer4")
+	printAttackBanner(method, fmt.Sprintf("%s:%d", host, port), threads, duration, 0, len(proxies), 0, 0, 0, "Layer4")
 
 	// Create attack configuration
 	attackCfg := &attacks.Layer4Config{
@@ -496,15 +496,49 @@ func printMethods() {
 	fmt.Println()
 }
 
-func printAttackBanner(method, target string, threads, duration int, layer string) {
+func printAttackBanner(method, target string, threads, duration, rpc, proxyCount, proxyType, userAgentCount, refererCount int, layer string) {
 	fmt.Println()
 	fmt.Println(ui.Header("  Attack Configuration"))
 	fmt.Println(ui.Info("  ─────────────────────────────────────"))
-	fmt.Printf("  Method:   %s\n", ui.FormatMethod(method))
-	fmt.Printf("  Target:   %s\n", ui.FormatTarget(target))
-	fmt.Printf("  Layer:    %s\n", ui.Info(layer))
-	fmt.Printf("  Threads:  %s\n", ui.FormatNumber(fmt.Sprintf("%d", threads)))
-	fmt.Printf("  Duration: %s\n", ui.FormatNumber(fmt.Sprintf("%d seconds", duration)))
+	fmt.Printf("  Method:      %s\n", ui.FormatMethod(method))
+	fmt.Printf("  Target:      %s\n", ui.FormatTarget(target))
+	fmt.Printf("  Layer:       %s\n", ui.Info(layer))
+	fmt.Printf("  Threads:     %s\n", ui.FormatNumber(fmt.Sprintf("%d", threads)))
+	fmt.Printf("  Duration:    %s\n", ui.FormatNumber(fmt.Sprintf("%d seconds", duration)))
+
+	// Layer 7 specific parameters
+	if layer == "Layer7" && rpc > 0 {
+		fmt.Printf("  RPC:         %s\n", ui.FormatNumber(fmt.Sprintf("%d", rpc)))
+	}
+
+	// Proxy information
+	if proxyCount > 0 {
+		proxyTypeStr := "Unknown"
+		switch proxyType {
+		case 0:
+			proxyTypeStr = "All (Mixed)"
+		case 1:
+			proxyTypeStr = "HTTP"
+		case 4:
+			proxyTypeStr = "SOCKS4"
+		case 5:
+			proxyTypeStr = "SOCKS5"
+		case 6:
+			proxyTypeStr = "Random"
+		}
+		fmt.Printf("  Proxies:     %s (%s)\n", ui.FormatNumber(fmt.Sprintf("%d", proxyCount)), proxyTypeStr)
+	}
+
+	// User agents and referers for Layer 7
+	if layer == "Layer7" {
+		if userAgentCount > 0 {
+			fmt.Printf("  User Agents: %s\n", ui.FormatNumber(fmt.Sprintf("%d", userAgentCount)))
+		}
+		if refererCount > 0 {
+			fmt.Printf("  Referers:    %s\n", ui.FormatNumber(fmt.Sprintf("%d", refererCount)))
+		}
+	}
+
 	fmt.Println(ui.Info("  ─────────────────────────────────────"))
 	fmt.Println()
 	ui.PrintInfo("Attack started at %s", time.Now().Format("15:04:05"))

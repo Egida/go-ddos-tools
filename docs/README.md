@@ -20,6 +20,7 @@ Welcome to the ddos-tools documentation! This directory contains comprehensive g
 - **[LAYER4-METHODS.md](LAYER4-METHODS.md)** - Complete Layer 4 methods reference guide
 - **[PROXIES.md](PROXIES.md)** - Proxy configuration and usage guide
 - **[CROSS-PLATFORM.md](CROSS-PLATFORM.md)** - Cross-platform usage guide (Linux, macOS, Windows)
+- **[OUTPUT-EXAMPLES.md](OUTPUT-EXAMPLES.md)** - Attack output examples and field explanations
 - **[MODERNIZATION.md](MODERNIZATION.md)** - Code modernization guide (Go 1.22+ features)
 - **[CHANGELOG.md](CHANGELOG.md)** - Version history and updates
 - **[CONTRIBUTING.md](CONTRIBUTING.md)** - Documentation contribution guide
@@ -134,6 +135,18 @@ Code modernization documentation:
 
 **Start here if you want to:** Understand the code modernization changes
 
+### OUTPUT-EXAMPLES.md
+Attack output documentation:
+- Complete examples of Layer 7 and Layer 4 attack output
+- Attack configuration banner format
+- Real-time progress display explanation
+- Attack summary examples
+- Field-by-field explanations
+- Before/after comparison showing improvements
+- Output troubleshooting tips
+
+**Start here if you want to:** Understand what the attack output shows
+
 ### CHANGELOG.md
 Version history including:
 - Recent updates and features
@@ -164,8 +177,9 @@ Contribution guidelines covering:
 5. **Check Layer 4 Methods** → [LAYER4-METHODS.md](LAYER4-METHODS.md)
 6. **Configure Proxies** → [PROXIES.md](PROXIES.md)
 7. **Advanced Features** → [USER-AGENTS.md](USER-AGENTS.md)
-8. **Code Modernization** → [MODERNIZATION.md](MODERNIZATION.md)
-9. **Stay Updated** → [CHANGELOG.md](CHANGELOG.md)
+8. **Understanding Output** → [OUTPUT-EXAMPLES.md](OUTPUT-EXAMPLES.md)
+9. **Code Modernization** → [MODERNIZATION.md](MODERNIZATION.md)
+10. **Stay Updated** → [CHANGELOG.md](CHANGELOG.md)
 
 ## 🎯 Use Case Guides
 
@@ -173,10 +187,11 @@ Contribution guidelines covering:
 1. Read [LEGAL.md](LEGAL.md) for compliance requirements
 2. Set up your platform using [CROSS-PLATFORM.md](CROSS-PLATFORM.md)
 3. Review [USAGE.md](USAGE.md) for testing methodologies
-4. Check [LAYER7-METHODS.md](LAYER7-METHODS.md) and [LAYER4-METHODS.md](LAYER4-METHODS.md) for all attack methods
-5. Review [PROXIES.md](PROXIES.md) for proxy configuration
-6. Review [USER-AGENTS.md](USER-AGENTS.md) for realistic traffic simulation
-7. Implement proper authorization per [LEGAL-QUICK-REF.md](LEGAL-QUICK-REF.md)
+5. Read [LAYER7-METHODS.md](LAYER7-METHODS.md) and [LAYER4-METHODS.md](LAYER4-METHODS.md) for all attack methods
+6. Review [PROXIES.md](PROXIES.md) for proxy configuration
+7. Review [USER-AGENTS.md](USER-AGENTS.md) for realistic traffic simulation
+8. Check [OUTPUT-EXAMPLES.md](OUTPUT-EXAMPLES.md) to understand attack output
+9. Implement proper authorization per [LEGAL-QUICK-REF.md](LEGAL-QUICK-REF.md)
 
 ### For Developers
 1. Review [../README.md](../README.md) for project structure
@@ -184,8 +199,9 @@ Contribution guidelines covering:
 3. Read [MODERNIZATION.md](MODERNIZATION.md) for code standards and modern Go features
 4. Read [LAYER7-METHODS.md](LAYER7-METHODS.md) and [LAYER4-METHODS.md](LAYER4-METHODS.md) for method specifications
 5. Read [PROXIES.md](PROXIES.md) for proxy implementation details
-6. Read [CHANGELOG.md](CHANGELOG.md) for recent changes
-7. Consult API.md (coming soon) for integration
+6. Review [OUTPUT-EXAMPLES.md](OUTPUT-EXAMPLES.md) for understanding output format
+7. Read [CHANGELOG.md](CHANGELOG.md) for recent changes
+8. Consult API.md (coming soon) for integration
 
 ### For Researchers
 1. Understand legal boundaries in [LEGAL.md](LEGAL.md)
