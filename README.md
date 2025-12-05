@@ -50,14 +50,14 @@ A powerful network stress testing and analysis toolkit written in Go. This proje
 - **Flexible Configuration**: JSON-based configuration system
 - **Thread Safety**: Atomic counters and safe concurrent operations
 
-### Built-in Tools
+### Built-in Tools - 7/7 ✅ 100% COMPLETE!
 - **DSTAT**: Real-time network and system statistics monitoring
 - **CHECK**: Website availability checker
 - **INFO**: IP geolocation and ISP information lookup
 - **TSSRV**: TeamSpeak SRV record resolver
 - **PING**: Advanced TCP ping utility
-- **DNS**: DNS lookup and resolution tools (Coming Soon)
-- **CFIP**: CloudFlare IP range finder (Coming Soon)
+- **CFIP**: CloudFlare IP range finder (IPv4 and IPv6 ranges)
+- **DNS**: Advanced DNS lookup tool (A, AAAA, CNAME, MX, NS, TXT records)
 
 ## 🎯 Supported Attack Methods
 

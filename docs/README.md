@@ -19,6 +19,7 @@ Welcome to the ddos-tools documentation! This directory contains comprehensive g
 - **[LAYER7-METHODS.md](LAYER7-METHODS.md)** - Complete Layer 7 methods reference guide
 - **[LAYER4-METHODS.md](LAYER4-METHODS.md)** - Complete Layer 4 methods reference guide
 - **[PROXIES.md](PROXIES.md)** - Proxy configuration and usage guide
+- **[TOOLS.md](TOOLS.md)** - Interactive tools guide (DSTAT, CHECK, INFO, PING, CFIP, DNS, TSSRV)
 - **[CROSS-PLATFORM.md](CROSS-PLATFORM.md)** - Cross-platform usage guide (Linux, macOS, Windows)
 - **[OUTPUT-EXAMPLES.md](OUTPUT-EXAMPLES.md)** - Attack output examples and field explanations
 - **[PERFORMANCE.md](PERFORMANCE.md)** - Performance optimization and goroutine efficiency guide
@@ -110,6 +111,19 @@ Comprehensive proxy configuration guide:
 
 **Start here if you want to:** Learn how to configure and use proxies
 
+### TOOLS.md
+Interactive tools documentation:
+- All 7 interactive tools (DSTAT, CHECK, INFO, TSSRV, PING, CFIP, DNS)
+- Detailed usage guide for each tool
+- Features and capabilities
+- Platform-specific features
+- Example outputs and use cases
+- Troubleshooting and best practices
+- Integration with attack tools
+- Security considerations
+
+**Start here if you want to:** Learn about the interactive diagnostic and reconnaissance tools
+
 ### CROSS-PLATFORM.md
 Cross-platform usage guide:
 - Platform support (Linux, macOS, Windows)
@@ -190,11 +204,12 @@ Contribution guidelines covering:
 4. **Check Layer 7 Methods** → [LAYER7-METHODS.md](LAYER7-METHODS.md)
 5. **Check Layer 4 Methods** → [LAYER4-METHODS.md](LAYER4-METHODS.md)
 6. **Configure Proxies** → [PROXIES.md](PROXIES.md)
-7. **Advanced Features** → [USER-AGENTS.md](USER-AGENTS.md)
-8. **Understanding Output** → [OUTPUT-EXAMPLES.md](OUTPUT-EXAMPLES.md)
-9. **Performance Tuning** → [PERFORMANCE.md](PERFORMANCE.md)
-10. **Code Modernization** → [MODERNIZATION.md](MODERNIZATION.md)
-11. **Stay Updated** → [CHANGELOG.md](CHANGELOG.md)
+7. **Learn Interactive Tools** → [TOOLS.md](TOOLS.md)
+8. **Advanced Features** → [USER-AGENTS.md](USER-AGENTS.md)
+9. **Understanding Output** → [OUTPUT-EXAMPLES.md](OUTPUT-EXAMPLES.md)
+10. **Performance Tuning** → [PERFORMANCE.md](PERFORMANCE.md)
+11. **Code Modernization** → [MODERNIZATION.md](MODERNIZATION.md)
+12. **Stay Updated** → [CHANGELOG.md](CHANGELOG.md)
 
 ## 🎯 Use Case Guides
 
@@ -202,8 +217,9 @@ Contribution guidelines covering:
 1. Read [LEGAL.md](LEGAL.md) for compliance requirements
 2. Set up your platform using [CROSS-PLATFORM.md](CROSS-PLATFORM.md)
 3. Review [USAGE.md](USAGE.md) for testing methodologies
-5. Read [LAYER7-METHODS.md](LAYER7-METHODS.md) and [LAYER4-METHODS.md](LAYER4-METHODS.md) for all attack methods
-6. Review [PROXIES.md](PROXIES.md) for proxy configuration
+4. Read [LAYER7-METHODS.md](LAYER7-METHODS.md) and [LAYER4-METHODS.md](LAYER4-METHODS.md) for all attack methods
+5. Review [PROXIES.md](PROXIES.md) for proxy configuration
+6. Learn [TOOLS.md](TOOLS.md) for reconnaissance and diagnostics
 7. Review [USER-AGENTS.md](USER-AGENTS.md) for realistic traffic simulation
 8. Check [OUTPUT-EXAMPLES.md](OUTPUT-EXAMPLES.md) to understand attack output
 9. Read [PERFORMANCE.md](PERFORMANCE.md) for optimization tips
@@ -231,10 +247,11 @@ Contribution guidelines covering:
 1. Install on your platform using [CROSS-PLATFORM.md](CROSS-PLATFORM.md)
 2. Check [USAGE.md](USAGE.md) for testing capabilities
 3. Review [LAYER4-METHODS.md](LAYER4-METHODS.md) for network-level attacks
-4. Review [USER-AGENTS.md](USER-AGENTS.md) for traffic patterns
-5. Configure [PROXIES.md](PROXIES.md) for distributed testing
-6. Ensure compliance with [LEGAL.md](LEGAL.md)
-7. Monitor updates in [CHANGELOG.md](CHANGELOG.md)
+4. Learn [TOOLS.md](TOOLS.md) for network diagnostics and monitoring
+5. Review [USER-AGENTS.md](USER-AGENTS.md) for traffic patterns
+6. Configure [PROXIES.md](PROXIES.md) for distributed testing
+7. Ensure compliance with [LEGAL.md](LEGAL.md)
+8. Monitor updates in [CHANGELOG.md](CHANGELOG.md)
 
 ## 📚 External Resources
 
@@ -335,7 +352,7 @@ See [../LICENSE](../LICENSE) for details.
 ---
 
 **Maintained By**: Muhammad Thariq  
-**Last Updated**: November 2025  
+**Last Updated**: December 2025  
 **Version**: 2.5 SNAPSHOT  
 **Copyright**: © 2025 Muhammad Thariq
 
